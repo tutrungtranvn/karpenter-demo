@@ -4,6 +4,9 @@ metadata:
   name: default
 spec:
   requirements:
+    - key: topology.kubernetes.io/zone
+      operator: In
+      values: [us-west-2a] # Zones
     - key: karpenter.sh/capacity-type
       operator: In
       values: ["spot"]
