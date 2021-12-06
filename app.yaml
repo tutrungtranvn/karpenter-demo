@@ -29,5 +29,4 @@ spec:
             cpu: 1000m
             memory: 1Gi
       nodeSelector:
-        topology.kubernetes.io/zone: us-west-2a
-        karpenter.sh/capacity-type: spot
+        topology.kubernetes.io/zone: us-east-1a

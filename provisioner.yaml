@@ -3,16 +3,23 @@ kind: Provisioner
 metadata:
   name: default
 spec:
+  labels:
+    team: a-team
   requirements:
+    # - key: "node.kubernetes.io/instance-type" 
+    #   operator: In
+    #   values: [t2.small, t2.large, t2.xlarge, t2.2xlarge]
     - key: topology.kubernetes.io/zone
       operator: In
-      values: [us-west-2a] # Zones
+      values: [us-east-1a, us-east-1b, us-east-1c] # Zones
     - key: karpenter.sh/capacity-type
       operator: In
-      values: ["spot"]
+      values: [spot]
   limits:
     resources:
       cpu: 1000
   provider:
+    tags:
+      team: a-team
     instanceProfile: KarpenterNodeInstanceProfile-devops-toolkit
   ttlSecondsAfterEmpty: 30
