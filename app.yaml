@@ -11,12 +11,12 @@ spec:
   replicas: 5
   selector:
     matchLabels:
-      app: devops-toolkit
+      app: eks-karpenter-cluster
       component: web
   template:
     metadata:
       labels:
-        app: devops-toolkit
+        app: eks-karpenter-cluster
         component: web
     spec:
       containers:
@@ -29,4 +29,4 @@ spec:
             cpu: 1000m
             memory: 1Gi
       nodeSelector:
-        topology.kubernetes.io/zone: us-east-1a
+        topology.kubernetes.io/zone: ap-southeast-1a

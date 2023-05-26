@@ -1,15 +1,31 @@
 apiVersion: eksctl.io/v1alpha5
 kind: ClusterConfig
 metadata:
-  name: devops-toolkit
-  region: us-east-1
-  version: "1.21"
+  name: eks-karpenter-cluster
+  region: ap-southeast-1
+  version: "1.26"
+
 managedNodeGroups:
-- instanceType: m5.large
+- name: eks-karpenter-cluster
+  instanceType: m5.large
   amiFamily: AmazonLinux2
-  name: devops-toolkit
-  desiredCapacity: 1
+  desiredCapacity: 6
   minSize: 1
   maxSize: 10
+
+nodeGroups:
+- name: eks-karpenter-ondemand
+  instanceType: m5.xlarge
+  instanceName: custom-node-name
+  desiredCapacity: 4
+
+- name: eks-karpenter-spot
+  minSize: 1
+  maxSize: 10
+  instancesDistribution:
+    instanceTypes: ["m5.large", "m6.xlarge"] # At least two instance types should be specified
+    onDemandBaseCapacity: 0
+    onDemandPercentageAboveBaseCapacity: 50
+    spotInstancePools: 2
 iam:
   withOIDC: true
